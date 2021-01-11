@@ -66,7 +66,7 @@ impl InputState {
 
     pub fn handle_event(&mut self, event: &Sdl2Event) -> Option<EventHandleResult> {
         match event {
-			Sdl2Event::Quit { .. } => return Some(EventHandleResult::Exit),
+            Sdl2Event::Quit { .. } => return Some(EventHandleResult::Exit),
             Sdl2Event::Window { win_event, .. } => match win_event {
                 WindowEvent::Close => return Some(EventHandleResult::Exit),
                 WindowEvent::Resized(width, height) => {
@@ -93,14 +93,20 @@ impl InputState {
                     return Some(EventHandleResult::Input(InputEvent::KeyUp(*k)));
                 }
             }
-			Sdl2Event::MouseButtonDown { mouse_btn, x, y, .. } => {
+            Sdl2Event::MouseButtonDown {
+                mouse_btn, x, y, ..
+            } => {
                 if let Some(kc) = Self::mouse_button_to_index(*mouse_btn) {
                     self.mouse_buttons[kc] = true;
                     let p = Point::new(*x as _, *y as _);
-                    return Some(EventHandleResult::Input(InputEvent::MouseDown(*mouse_btn, p)));
+                    return Some(EventHandleResult::Input(InputEvent::MouseDown(
+                        *mouse_btn, p,
+                    )));
                 }
             }
-            Sdl2Event::MouseButtonUp { mouse_btn, x, y, .. } => {
+            Sdl2Event::MouseButtonUp {
+                mouse_btn, x, y, ..
+            } => {
                 if let Some(kc) = Self::mouse_button_to_index(*mouse_btn) {
                     self.mouse_buttons[kc] = false;
                     let p = Point::new(*x as _, *y as _);

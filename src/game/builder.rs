@@ -14,7 +14,7 @@ impl<'a> Default for Builder<'a> {
     }
 }
 
-impl <'a> Builder<'a> {
+impl<'a> Builder<'a> {
     /// Construct the app builder initialized with default options
     pub fn new() -> Self {
         Self {
@@ -25,13 +25,13 @@ impl <'a> Builder<'a> {
     }
 
     /// Specifies the inner size of the window. Both physical and logical coordinates are accepted.
-        pub fn inner_size(mut self, inner_size: LogicalSize) -> Self {
+    pub fn inner_size(mut self, inner_size: LogicalSize) -> Self {
         self.inner_size = inner_size.into();
         self
     }
 
     /// Specifies the title that the window will be created with
-        pub fn window_title(mut self, title: &'a str) -> Self {
+    pub fn window_title(mut self, title: &'a str) -> Self {
         self.window_title = title.as_ref();
         self
     }
